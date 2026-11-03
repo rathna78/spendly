@@ -1,0 +1,217 @@
+/* ------------------------------------------------------------------ */
+/* Landing page — hero section                                         */
+/* Loaded after style.css, so these rules override the base .hero ones */
+/* ------------------------------------------------------------------ */
+
+.hero {
+    display: block;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 5rem 2rem 4.5rem;
+    text-align: center;
+}
+
+.hero-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Badge pill */
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: #e6f4ee;
+    color: #1f6b4a;
+    border: 1px solid #c4e5d5;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0;
+    text-transform: none;
+    padding: 0.55rem 1.5rem;
+    border-radius: 999px;
+    margin-bottom: 3rem;
+}
+
+.hero-badge-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #3f9b72;
+}
+
+/* Headline */
+.hero-title {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: clamp(2.5rem, 6.4vw, 4.6rem);
+    line-height: 1.18;
+    letter-spacing: -0.03em;
+    color: #111111;
+    margin-bottom: 2rem;
+}
+
+.hero-title em {
+    font-style: normal;
+    color: #4a9b78;
+}
+
+/* Subtitle */
+.hero-subtitle {
+    font-size: 1.4rem;
+    line-height: 1.85;
+    color: #666666;
+    max-width: 720px;
+    margin: 0 auto 3.25rem;
+}
+
+/* Buttons */
+.hero-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.hero-btn {
+    display: inline-block;
+    background: #111111;
+    color: #ffffff;
+    font-size: 1.3rem;
+    font-weight: 500;
+    padding: 1.2rem 2.4rem;
+    border-radius: 14px;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.hero-btn:hover {
+    background: #2a2a2a;
+    transform: translateY(-1px);
+}
+
+/* Dashboard preview */
+.hero-visual {
+    display: block;
+    margin-top: 4.5rem;
+}
+
+.mock-card {
+    max-width: none;
+    width: 100%;
+    background: #f7f6f3;
+    border: 1px solid #e4e1da;
+    border-radius: 24px;
+    padding: 1.75rem;
+    box-shadow: none;
+    text-align: left;
+}
+
+.mock-dots {
+    display: flex;
+    gap: 0.65rem;
+    margin-bottom: 1.6rem;
+    padding-left: 0.1rem;
+}
+
+.mock-dot {
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+}
+
+.mock-dot-red { background: #e8908e; }
+.mock-dot-yellow { background: #f1c56f; }
+.mock-dot-green { background: #a8dcc7; }
+
+.mock-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+
+.mock-stat {
+    background: #ffffff;
+    border: 1px solid #e4e1da;
+    border-radius: 18px;
+    padding: 1.6rem 1.6rem 1.5rem;
+}
+
+.mock-stat-label {
+    font-size: 1.05rem;
+    color: #8a8a8a;
+    margin-bottom: 0.7rem;
+}
+
+.mock-stat-value {
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: #111111;
+    margin-bottom: 0.55rem;
+}
+
+.mock-stat-note {
+    font-size: 1.05rem;
+    color: #9a9a9a;
+}
+
+.mock-stat-note-up { color: #d1453b; }
+.mock-stat-note-good { color: #3f9b72; }
+
+.mock-chart {
+    background: #ffffff;
+    border: 1px solid #e4e1da;
+    border-radius: 18px;
+    padding: 1.6rem 1.6rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.05rem;
+}
+
+.mock-chart-row {
+    display: grid;
+    grid-template-columns: 5.5rem 1fr;
+    align-items: center;
+    gap: 1rem;
+}
+
+.mock-chart-cat {
+    font-size: 1.15rem;
+    color: #444444;
+    text-align: right;
+}
+
+.mock-chart-track {
+    height: 13px;
+    background: #efede7;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.mock-chart-bar {
+    height: 100%;
+    border-radius: 999px;
+}
+
+.mock-chart-bar-food { background: #e5a13f; }
+.mock-chart-bar-travel { background: #4a86d6; }
+.mock-chart-bar-bills { background: #7f6fd4; }
+
+/* Responsive */
+@media (max-width: 900px) {
+    .hero-visual { display: block; }
+    .hero-subtitle { max-width: 100%; font-size: 1.15rem; }
+    .hero-btn { font-size: 1.1rem; padding: 1rem 1.8rem; }
+}
+
+@media (max-width: 600px) {
+    .hero { padding: 3rem 1rem 3rem; }
+    .hero-badge { font-size: 0.85rem; padding: 0.45rem 1rem; margin-bottom: 2rem; }
+    .hero-subtitle { font-size: 1.05rem; margin-bottom: 2rem; }
+    .mock-stats { grid-template-columns: 1fr; gap: 0.75rem; }
+    .mock-stat-value { font-size: 1.6rem; }
+    .mock-chart-row { grid-template-columns: 4rem 1fr; }
+}
