@@ -8,7 +8,8 @@ from werkzeug.security import generate_password_hash
 logger = logging.getLogger(__name__)
 
 # Database lives in the project root (already git-ignored as expense_tracker.db).
-DB_PATH = os.path.join(
+# Override with the SPENDLY_DB_PATH environment variable (used by tests).
+DB_PATH = os.environ.get("SPENDLY_DB_PATH") or os.path.join(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
     "expense_tracker.db",
 )
@@ -75,6 +76,44 @@ def init_db():
     except sqlite3.Error:
         conn.rollback()
         logger.exception("init_db failed while creating tables")
+        raise
+    finally:
+        conn.close()
+
+
+def create_user(name, email, password):
+    """Insert a new user with a hashed password and return the new id.
+
+    sqlite3.IntegrityError (duplicate email) is propagated to the caller.
+    """
+    conn = get_db()
+    try:
+        cur = conn.execute(
+            "INSERT INTO users (name, email, password_hash) VALUES (?, ?, ?)",
+            (name, email, generate_password_hash(password)),
+        )
+        conn.commit()
+        return cur.lastrowid
+    except sqlite3.IntegrityError:
+        conn.rollback()
+        raise
+    except sqlite3.Error:
+        conn.rollback()
+        logger.exception("create_user failed")
+        raise
+    finally:
+        conn.close()
+
+
+def get_user_by_email(email):
+    """Return the user row for the given email, or None."""
+    conn = get_db()
+    try:
+        return conn.execute(
+            "SELECT * FROM users WHERE email = ?", (email,)
+        ).fetchone()
+    except sqlite3.Error:
+        logger.exception("get_user_by_email failed")
         raise
     finally:
         conn.close()
